@@ -216,6 +216,8 @@ private fun MainContent(
                             
                             stav k ${Calendar.getInstance().let { "${it[DAY_OF_MONTH]}. ${it[MONTH] + 1}" }}:
                             ${vsechnyVeci.first { it.kategorie == Vec.Kategorie.Auto }.mnozstvi} km
+                            
+                            Roman
                         """.trimIndent(),
                 to = listOf("blaha@regulus.cz"),
                 cc = listOf("roman.blaha.cb@gmail.com"),

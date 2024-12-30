@@ -150,7 +150,7 @@ private fun MainContent(
             Text(if (chyba.isEmpty()) "Emaily odeslány!" else "Emaily neodeslány")
         },
         text = {
-            Text(if (chyba.isEmpty()) "Emaily se úspěšně odeslaly na adresu blaha@regulus.cz a blahova@regulus.cz" else "Bohužel, oba emaily se nepodařilo odeslat. Zde je chyba: $chyba")
+            Text(if (chyba.isEmpty()) "Emaily se úspěšně odeslaly na adresu Hana.Reznickova@regulus.cz a blahova@regulus.cz" else "Bohužel, oba emaily se nepodařilo odeslat. Zde je chyba: $chyba")
         },
     )
 
@@ -212,15 +212,15 @@ private fun MainContent(
 
             api.sendEmail(
                 body = """
-                            Ahoj Jirko,
+                            Ahoj Hano,
                             
                             stav k ${Calendar.getInstance().let { "${it[DAY_OF_MONTH]}. ${it[MONTH] + 1}" }}:
                             ${vsechnyVeci.first { it.kategorie == Vec.Kategorie.Auto }.mnozstvi} km
                             
-                            Roman
+                            Roman Bláha
                         """.trimIndent(),
-                to = listOf("blaha@regulus.cz"),
-                cc = listOf("roman.blaha.cb@gmail.com"),
+                to = listOf("Hana.Reznickova@regulus.cz"),
+                cc = listOf("blaha@regulus.cz"),
                 subject = "km",
                 attachments = vsechnyVeci
                     .filter { it.kategorie == Vec.Kategorie.Auto }

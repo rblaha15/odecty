@@ -322,6 +322,9 @@ private fun MainContent(
                                 ),
                                 keyboardActions = KeyboardActions {
                                     focusManager.moveFocus(focusDirection = FocusDirection.Down)
+                                },
+                                supportingText = {
+                                    if (minulaVec != null) Text("${minulaVec.mnozstvi} ${minulaVec.jednotky}")
                                 }
                             )
 

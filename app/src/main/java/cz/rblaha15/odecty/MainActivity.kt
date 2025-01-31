@@ -19,6 +19,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.AddAPhoto
 import androidx.compose.material.icons.filled.HideImage
 import androidx.compose.material.icons.filled.Send
@@ -196,14 +197,15 @@ private fun MainContent(
                             }
                         }
                     },
-                to = listOf("blahova@regulus.cz"),
-                cc = listOf("roman.blaha.cb@gmail.com"),
+                to = listOf("radek.blaha.15@gmail.com"),
+//                to = listOf("blahova@regulus.cz"),
+//                cc = listOf("roman.blaha.cb@gmail.com"),
                 subject = "Odečty",
                 attachments = vsechnyVeci
                     .filter { it.kategorie != Vec.Kategorie.Auto }
                     .mapNotNull { it.fotka },
                 onError = {
-                    prvni = it.toString()
+                    prvni = it.message ?: "?"
                 },
                 onSend = {
                     prvni = ""
@@ -212,21 +214,22 @@ private fun MainContent(
 
             api.sendEmail(
                 body = """
-                            Ahoj Hano,
+                            Ahoj Hanko,
                             
                             stav k ${Calendar.getInstance().let { "${it[DAY_OF_MONTH]}. ${it[MONTH] + 1}" }}:
                             ${vsechnyVeci.first { it.kategorie == Vec.Kategorie.Auto }.mnozstvi} km
                             
                             Roman Bláha
                         """.trimIndent(),
-                to = listOf("Hana.Reznickova@regulus.cz"),
-                cc = listOf("blaha@regulus.cz"),
+                to = listOf("radek.blaha.15@gmail.com"),
+//                to = listOf("Hana.Reznickova@regulus.cz"),
+//                cc = listOf("blaha@regulus.cz"),
                 subject = "km",
                 attachments = vsechnyVeci
                     .filter { it.kategorie == Vec.Kategorie.Auto }
                     .mapNotNull { it.fotka },
                 onError = {
-                    druhy = it.toString()
+                    druhy = it.message ?: "?"
                 },
                 onSend = {
                     druhy = ""
@@ -239,8 +242,8 @@ private fun MainContent(
 
             chyba = when {
                 prvni == "" && druhy == "" -> ""
-                prvni == "" -> "$druhy"
-                druhy == "" -> "$prvni"
+                prvni == "" -> druhy
+                druhy == "" -> prvni
                 else -> "$prvni, $druhy"
             }
             poslanoDialog = true
@@ -264,7 +267,7 @@ private fun MainContent(
                     odeslatMaily()
                 },
             ) {
-                Icon(Icons.Default.Send, "Odeslat email")
+                Icon(Icons.AutoMirrored.Default.Send, "Odeslat email")
             }
         }
     ) { paddingValues ->
@@ -336,7 +339,7 @@ private fun MainContent(
                             if (vec.maMitFotku) {
                                 if (vec.fotka == null) IconButton(
                                     onClick = {
-                                        fotkyAPI.vyfotitFotku(if (vec.nazev == null) "${kategorie.nazev}" else "${vec.nazev}") { file ->
+                                        fotkyAPI.vyfotitFotku(vec.nazev ?: kategorie.nazev ?: "?") { file ->
                                             vsechnyVeci = vsechnyVeci.mutate {
                                                 it[indexOf(vec)] = vec.copy(fotka = file)
                                             }

@@ -197,9 +197,9 @@ private fun MainContent(
                             }
                         }
                     },
-                to = listOf("radek.blaha.15@gmail.com"),
-//                to = listOf("blahova@regulus.cz"),
-//                cc = listOf("roman.blaha.cb@gmail.com"),
+//                to = listOf("radek.blaha.15@gmail.com"),
+                to = listOf("blahova@regulus.cz"),
+                cc = listOf("roman.blaha.cb@gmail.com"),
                 subject = "Odečty",
                 attachments = vsechnyVeci
                     .filter { it.kategorie != Vec.Kategorie.Auto }
@@ -221,9 +221,9 @@ private fun MainContent(
                             
                             Roman Bláha
                         """.trimIndent(),
-                to = listOf("radek.blaha.15@gmail.com"),
-//                to = listOf("Hana.Reznickova@regulus.cz"),
-//                cc = listOf("blaha@regulus.cz"),
+//                to = listOf("radek.blaha.15@gmail.com"),
+                to = listOf("Hana.Reznickova@regulus.cz"),
+                cc = listOf("blaha@regulus.cz"),
                 subject = "km",
                 attachments = vsechnyVeci
                     .filter { it.kategorie == Vec.Kategorie.Auto }
